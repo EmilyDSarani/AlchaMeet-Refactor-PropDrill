@@ -2,13 +2,15 @@ import { useContext, createContext, useState, useEffect } from 'react'
 import { fetchUser } from '../services/user'
 
 // Create Context
-const UserContext = createContext()
+// this is the start of our recipe book. The binder if you will
+const UserContext = createContext() 
 
 // Create Provider
+// the Provider is giving access to the book, like giving us the boook
 const UserProvider = ({ children }) => {
     const [user, setUser] = useState({})
       
-  
+  // we take this cute thing from the app.js and it is just restructoring it so that we can easily use it everywhere
     useEffect(() => {
         
         fetchUser()
@@ -20,11 +22,12 @@ const UserProvider = ({ children }) => {
           })
       }, [])
 
+     // the return here is our recipe. this is the goodies that will be made 
     return <UserContext.Provider value={{user, setUser}}>{children}</UserContext.Provider>
 } 
 
 // Create Custom Hook
-
+// the hook here will throw an error if it is not used correctly
 const useUser = () => {
     const context = useContext(UserContext)
 
